@@ -1,12 +1,12 @@
 import { loadRemote } from "@module-federation/enhanced/runtime";
 import React, { Suspense, useEffect, useState } from "react";
 
-type DynamicImport = {
+type DynamicModule = {
     module: string | null;
     scope: string | null;
 }
 
-function useDynamicImport({module, scope}: DynamicImport) {
+function useDynamicImport({module, scope}: DynamicModule) {
     const [component, setComponent] = useState<React.FC | null>(null);
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function useDynamicImport({module, scope}: DynamicImport) {
 }
 
 export const Button = () => {
-    const [{module, scope}, setSystem] = useState<DynamicImport>({
+    const [{module, scope}, setSystem] = useState<DynamicModule>({
         scope: null,
         module: null
     });
