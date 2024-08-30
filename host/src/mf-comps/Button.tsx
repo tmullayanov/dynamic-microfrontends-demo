@@ -1,10 +1,14 @@
-import { loadRemote } from "@module-federation/enhanced/runtime";
 import React, { Suspense, useEffect, useState } from "react";
+import { ButtonMFLoader } from "./MFLoader";
 
 type DynamicModule = {
     module: string | null;
     scope: string | null;
 }
+
+// might be injected from context or as a prop.
+// I left it this way for the sake of simplicity of the example.
+const buttonLoader = new ButtonMFLoader();
 
 function useDynamicImport({module, scope}: DynamicModule) {
     const [component, setComponent] = useState<React.FC | null>(null);
@@ -14,12 +18,8 @@ function useDynamicImport({module, scope}: DynamicModule) {
 
         const loadComponent = async () => {
             try {
-                const remote = await loadRemote<{default: React.FC}>(`${scope}/${module}`);
-                if (!remote) {
-                    console.warn(`loadRemote returns NULL for ${scope}/${module}`);
-                    return;
-                }
-                setComponent(() => remote.default);
+                const remote = await buttonLoader.loadButtonModule(scope, module);
+                setComponent(() => remote);
             } catch (error) {
                 console.error(`Error loading module ${scope}/${module};`, error);
             }

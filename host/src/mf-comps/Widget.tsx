@@ -1,5 +1,9 @@
-import { loadRemote, registerRemotes } from "@module-federation/enhanced/runtime";
 import React, { Suspense, useMemo, useState } from "react";
+import { WidgetMFLoader } from "./MFLoader";
+
+// might be injected from context or as a prop.
+// I left it this way for the sake of simplicity of the example.
+const loader = new WidgetMFLoader();
 
 export const Widget = () => {
 
@@ -10,23 +14,11 @@ export const Widget = () => {
     const loadUrl = async () => {
         const url = await getUrl();
         setUrl(url);
-        registerRemotes([{
-            name: 'provider_2',
-            entry: url
-        }]);
+        loader.registerWidgetRemote('provider_2', url);
     }
     const loadComp = async () => {
-        // если контейнер и встраиваемый компонент активно используют хуки, может понадобиться оборачивание 
-        // загрузки в React.lazy.
-        // React.lazy рассчитывает на то, что компонент будет экспортирован как дефолтный.
-        // Если он не экспоритруется как дефолтный,
-        // придется дополнительно преобразовать результат loadRemote. 
-        const remote = React.lazy(
-            () => loadRemote<{Widget: React.FC}>(`provider_2/widget`)
-                .then(md => md 
-                    ? ({default: md.Widget}) 
-                    : Promise.reject()));
-        setComponent(remote ?? null);
+        const widget = loader.loadWidgetModule();
+        setComponent(widget);
     }
 
     return <>
