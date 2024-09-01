@@ -1,8 +1,12 @@
 # Dynamic microfrontends demo
 
-This example is heavily based on microfrontends-example dynamic remote applications, but it goes a little bit further.
+This example is heavily based on microfrontends-example dynamic remote applications:
+- https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes
+- https://github.com/module-federation/module-federation-examples/tree/master/dynamic-system-host
 
-First, it shows how to register remote dynamically in such scenarios where the link to the remote is dynamic itself.
+But this example goes a little bit further.
+
+First, it shows how to register remote dynamically in such scenarios where the link to the remote is dynamic itself and needs to be retrieved at runtime.
 
 Second, it shows how to handle dynamic microfrontends load with TypeScript.
 
