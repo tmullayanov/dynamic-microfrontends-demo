@@ -32,9 +32,6 @@ module.exports = {
         new ModuleFederationPlugin({
             name: 'host',
             // adds react as shared module
-            // version is inferred from package.json
-            // there is no version check for the required version
-            // so it will always use the higher version found
             shared: ['react', 'react-dom']
         }),
         new HtmlWebpackPlugin({

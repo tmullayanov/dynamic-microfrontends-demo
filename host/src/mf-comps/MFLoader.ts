@@ -1,5 +1,21 @@
-import { loadRemote, registerRemotes } from "@module-federation/enhanced/runtime";
+import { init, loadRemote, registerRemotes } from "@module-federation/enhanced/runtime";
 import React from "react";
+
+
+export const initDynamicFederation = () => {
+    // 1. init можно вызвать статически со списком всех ремоутов
+    // Компонент из провайдера загружается в компоненте Button
+    // 2. Подгружать новые ремоуты можно и динамически, пример этого сценария в компоненте Widget.
+    init({
+    name: 'host',
+    remotes: [
+        {
+            name: 'provider',
+            entry: 'http://localhost:4002/remoteEntry.js'
+        }
+    ]
+});
+}
 
 enum MFState {
     INIT,
