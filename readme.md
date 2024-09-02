@@ -15,7 +15,7 @@ So it provides useful and convenient point of reference in case microfrontend ur
 # Usage
 
 ```sh
-$ npm run install # install all dependencies for all subprojects
+$ npm i # will also call `install` script from package.json afterwards
 $ npm run start # run all microfrontends together
 # or, to check that everything works out well
 $ npm run e2e
