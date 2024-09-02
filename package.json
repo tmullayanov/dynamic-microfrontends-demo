@@ -10,7 +10,7 @@
     "start-host": "cd host && npm start",
     "start-remote": "cd remote && npm start",
     "start-remote-2": "cd remote_2 && npm start",
-    "install": "run-s -pl install-*",
+    "install": "run-s -l install-*",
     "start": "run-p -l start-*",
     "e2e:test": "cypress run",
     "e2e": "start-server-and-test start http://localhost:4001 e2e:test"
