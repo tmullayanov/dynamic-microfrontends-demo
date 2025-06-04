@@ -9,6 +9,7 @@ export const App = () => {
 
     return <div>
         <h1>Dynamic MicroFrontends Host</h1>
+        <p>Load mictofrontends dynamically</p>
         <hr />
         <div style={{
             display: 'flex',

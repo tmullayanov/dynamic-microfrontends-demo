@@ -10,7 +10,7 @@ module.exports = {
     entry: './src/index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
+        filename: '[name].[chunkhash].js'
     },
     module: {
         rules: [
@@ -32,7 +32,17 @@ module.exports = {
         new ModuleFederationPlugin({
             name: 'host',
             // adds react as shared module
-            shared: ['react', 'react-dom']
+            // shared: ['react', 'react-dom']
+            shared: {
+                react: {
+                    singleton: true,
+                    eager: true
+                },
+                'react-dom': {
+                    singleton: true,
+                    eager: true
+                }
+            }
         }),
         new HtmlWebpackPlugin({
             template: "public/index.html" // create a template to start from
